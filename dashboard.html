@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escuela Philips - Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/theme.css">
+    <script src="assets/theme.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilo para el icono activo */
+        .nav-btn.active {
+            background-color: #EFF6FF;
+            color: #2563EB;
+        }
+
+        .dark .nav-btn.active {
+            background-color: rgba(30, 58, 138, 0.5);
+            color: #60A5FA;
+        }
+
+        .nav-btn.active .icon-wrapper {
+            stroke: #2563EB;
+        }
+
+        .dark .nav-btn.active .icon-wrapper {
+            stroke: #60A5FA;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #64748B;
+        }
+    </style>
+</head>
+
+<body
+    class="text-slate-600 dark:text-slate-300 flex h-screen overflow-hidden bg-[#F8FAFC] dark:bg-slate-900 transition-colors duration-300">
+
+    <aside
+        class="w-72 bg-white dark:bg-slate-800 border-r border-blue-50 dark:border-slate-700 flex flex-col h-full z-20 shadow-sm flex-shrink-0 transition-colors duration-300">
+        <div class="p-6 flex items-center gap-3">
+            <div class="w-10 h-10 flex items-center justify-center text-white">
+                <img src="https://www.philips.edu.ar/favicon.png" alt="Logo Escuela Philips"
+                    class="w-25 h-25 object-contain">
+            </div>
+            <h1 class="font-extrabold text-xl text-slate-800 dark:text-slate-100 tracking-tight">Escuela Philips</h1>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-1 overflow-y-auto py-2">
+
+            <button onclick="showPage('panel', this)"
+                class="nav-btn active w-full flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl font-bold transition-all group text-left">
+                <i data-lucide="house" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition"></i>
+                Panel
+            </button>
+
+            <button onclick="showPage('comunicados', this)"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl font-bold transition-all group text-left">
+                <i data-lucide="megaphone" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition"></i>
+                Comunicados
+            </button>
+
+            <button onclick="showPage('calificaciones', this)"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl font-bold transition-all group text-left">
+                <i data-lucide="bar-chart-3" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition"></i>
+                Calificaciones
+            </button>
+
+            <button onclick="showPage('adeudados', this)"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl font-bold transition-all group text-left">
+                <i data-lucide="book-x" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition"></i>
+                Temas Adeudados
+            </button>
+
+            <button onclick="showPage('asistencia', this)"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl font-bold transition-all group text-left">
+                <i data-lucide="clipboard-check" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition"></i>
+                Asistencia
+            </button>
+
+            <button onclick="showPage('notificaciones', this)"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl font-bold transition-all group text-left">
+                <i data-lucide="bell" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition"></i>
+                Notificaciones
+            </button>
+
+            <button onclick="showPage('asistencia_clases', this)"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl font-bold transition-all group text-left">
+                <i data-lucide="list-checks" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition"></i>
+                Asistencia Clases
+            </button>
+
+            <button onclick="showPage('horario', this)"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-2xl font-bold transition-all group text-left">
+                <i data-lucide="calendar-clock" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition"></i>
+                Horario
+            </button>
+        </nav>
+
+        <div class="p-4 border-t border-blue-50 dark:border-slate-700">
+            <a href="login.html"
+                class="w-full flex items-center gap-4 px-4 py-3 text-red-400 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900/20 rounded-2xl font-bold transition-all group text-left">
+                <i data-lucide="log-out" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition"></i>
+                Cerrar Sesión
+            </a>
+        </div>
+    </aside>
+
+    <main
+        class="flex-1 flex flex-col h-full overflow-hidden relative bg-[#F8FAFC] dark:bg-slate-900 transition-colors duration-300">
+
+        <header
+            class="h-20 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-blue-50 dark:border-slate-700 flex items-center justify-between px-8 z-10 sticky top-0 transition-colors duration-300">
+            <h2 id="page-title" class="text-2xl font-extrabold text-slate-800 dark:text-slate-100">Panel General</h2>
+            <div class="flex items-center gap-4">
+
+                <!-- Botón de cambio de tema -->
+                <button onclick="toggleTheme()"
+                    class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors"
+                    title="Cambiar tema">
+                    <i data-lucide="moon" class="w-5 h-5 icon-moon"></i>
+                    <i data-lucide="sun" class="w-5 h-5 icon-sun hidden"></i>
+                </button>
+
+                <div class="text-right leading-tight">
+                    <p class="text-sm font-bold text-slate-700 dark:text-slate-200">Ruiz, Cinthia Elizabeth</p>
+                    <p class="text-[11px] text-blue-500 dark:text-blue-400 font-bold uppercase tracking-wide">Tutor/a de
+                        Franco Valentin</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-8 relative">
+
+            <section id="panel" class="page-section active max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 space-y-6">
+                        <div
+                            class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-[0_4px_20px_-4px_rgba(59,130,246,0.1)] dark:shadow-black/20 transition-colors">
+                            <h3
+                                class="font-bold text-lg text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
+                                <i data-lucide="mail" class="w-5 h-5 text-blue-500"></i> Últimos mensajes
+                            </h3>
+                            <div class="space-y-3">
+                                <div
+                                    class="p-4 rounded-2xl bg-blue-50/50 dark:bg-slate-700/50 hover:bg-blue-50 dark:hover:bg-slate-700 transition cursor-pointer flex items-center gap-4 group">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-white dark:bg-slate-600 flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-sm group-hover:scale-110 transition">
+                                        <i data-lucide="school" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-slate-700 dark:text-slate-200 text-sm">Autorización
+                                            pasantía</h4>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400">Escuela Philips</p>
+                                    </div>
+                                    <span
+                                        class="text-xs font-bold text-blue-400 dark:text-blue-300 bg-white dark:bg-slate-600 px-2 py-1 rounded-lg shadow-sm">2
+                                        FEB</span>
+                                </div>
+                                <div
+                                    class="p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition cursor-pointer flex items-center gap-4 group">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 shadow-sm group-hover:bg-blue-100 group-hover:text-blue-600 dark:group-hover:bg-blue-900/30 dark:group-hover:text-blue-400 transition">
+                                        <i data-lucide="info" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-slate-700 dark:text-slate-200 text-sm">Circular
+                                            Arancelaria 2026</h4>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400">Administración</p>
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-400">30 DIC</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-lg shadow-blue-200 dark:shadow-blue-900/20">
+                            <i data-lucide="file-bar-chart-2"
+                                class="absolute right-0 bottom-0 w-64 h-64 text-white opacity-10 -translate-x-10 translate-y-10"></i>
+
+                            <div class="relative z-10 text-center py-6">
+                                <h3 class="text-2xl font-bold mb-2">Boletín de Calificaciones</h3>
+                                <p class="text-blue-100 font-medium mb-6">Próximamente disponible</p>
+                                <div
+                                    class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 mx-auto w-fit">
+                                    <i data-lucide="calendar" class="w-3 h-3"></i> Ciclo Lectivo 2026
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-[0_4px_20px_-4px_rgba(59,130,246,0.1)] dark:shadow-black/20 h-fit transition-colors">
+                        <h3 class="font-bold text-lg text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
+                            <i data-lucide="folder-open" class="w-5 h-5 text-indigo-500"></i> Archivos
+                        </h3>
+                        <div class="space-y-2">
+                            <a href="#"
+                                class="block p-3 rounded-xl bg-orange-50 dark:bg-orange-900/20 border border-orange-100 dark:border-orange-900/30 text-orange-700 dark:text-orange-400 text-sm font-bold hover:shadow-sm transition flex items-center gap-3">
+                                <i data-lucide="file-heart" class="w-5 h-5"></i> Reconocimiento Médico
+                            </a>
+                            <a href="#"
+                                class="block p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 text-slate-600 dark:text-slate-300 text-sm font-semibold transition flex items-center gap-3 group">
+                                <i data-lucide="file-text"
+                                    class="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-blue-500 transition"></i>
+                                Reglamento 2026
+                            </a>
+                            <a href="#"
+                                class="block p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 text-slate-600 dark:text-slate-300 text-sm font-semibold transition flex items-center gap-3 group">
+                                <i data-lucide="file-text"
+                                    class="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-blue-500 transition"></i>
+                                Condiciones Federados
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="comunicados" class="page-section max-w-5xl mx-auto">
+                <div class="bg-white dark:bg-slate-800 rounded-[2rem] shadow-sm overflow-hidden transition-colors">
+                    <div class="p-6 border-b border-slate-50 dark:border-slate-700 flex justify-between items-center">
+                        <h3 class="font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                            <i data-lucide="inbox" class="w-5 h-5"></i> Bandeja de Entrada
+                        </h3>
+                        <div
+                            class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-xl flex items-center gap-2 focus-within:ring-2 focus-within:ring-blue-100 dark:focus-within:ring-blue-900">
+                            <i data-lucide="search" class="w-4 h-4 text-slate-400"></i>
+                            <input type="text" placeholder="Buscar..."
+                                class="bg-transparent text-sm outline-none w-32 md:w-48 dark:text-slate-200 dark:placeholder-slate-500">
+                        </div>
+                    </div>
+                    <div>
+                        <div
+                            class="p-6 border-b border-slate-50 dark:border-slate-700 hover:bg-blue-50/30 dark:hover:bg-slate-700/30 transition cursor-pointer group">
+                            <div class="flex justify-between mb-2">
+                                <span
+                                    class="bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300 px-3 py-1 rounded-full text-[10px] font-bold uppercase">Institucional</span>
+                                <span class="text-xs text-slate-400 font-bold flex items-center gap-1"><i
+                                        data-lucide="clock" class="w-3 h-3"></i> 2d</span>
+                            </div>
+                            <h4
+                                class="text-lg font-bold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 mb-1 transition">
+                                Inicio de clases y actos protocolares</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">Estimadas familias, les
+                                informamos el cronograma para el primer día de clases...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="calificaciones" class="page-section max-w-6xl mx-auto">
+                <div class="bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-sm transition-colors">
+                    <div class="flex justify-between items-end mb-6">
+                        <div>
+                            <h3 class="font-bold text-xl text-slate-800 dark:text-slate-100">Boletín 2026</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">6to Año "B" - Técnico en Computación
+                            </p>
+                        </div>
+                        <button
+                            class="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-100 dark:hover:bg-blue-900/50 transition flex items-center gap-2">
+                            <i data-lucide="download" class="w-4 h-4"></i> Descargar PDF
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-700">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="bg-blue-50/50 dark:bg-slate-700/50">
+                                    <th class="p-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">
+                                        Materia</th>
+                                    <th
+                                        class="p-4 text-xs font-bold text-center text-slate-500 dark:text-slate-400 uppercase">
+                                        1º Trim</th>
+                                    <th
+                                        class="p-4 text-xs font-bold text-center text-slate-500 dark:text-slate-400 uppercase">
+                                        2º Trim</th>
+                                    <th
+                                        class="p-4 text-xs font-bold text-center text-slate-500 dark:text-slate-400 uppercase">
+                                        3º Trim</th>
+                                    <th
+                                        class="p-4 text-xs font-bold text-center text-blue-600 dark:text-blue-400 uppercase">
+                                        Final</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-slate-50 dark:border-slate-700">
+                                    <td
+                                        class="p-4 font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                                        <div class="w-1 h-8 bg-blue-500 rounded-full"></div> Matemática VI
+                                    </td>
+                                    <td class="p-4 text-center text-slate-600 dark:text-slate-400">-</td>
+                                    <td class="p-4 text-center text-slate-600 dark:text-slate-400">-</td>
+                                    <td class="p-4 text-center text-slate-600 dark:text-slate-400">-</td>
+                                    <td class="p-4 text-center font-bold text-slate-300 dark:text-slate-600">-</td>
+                                </tr>
+                                <tr class="border-b border-slate-50 dark:border-slate-700">
+                                    <td
+                                        class="p-4 font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                                        <div class="w-1 h-8 bg-green-500 rounded-full"></div> Lab. Programación
+                                    </td>
+                                    <td
+                                        class="p-4 text-center text-slate-600 dark:text-slate-200 font-bold bg-green-50 dark:bg-green-900/20 rounded-lg text-green-700 dark:text-green-400">
+                                        9</td>
+                                    <td class="p-4 text-center text-slate-600 dark:text-slate-400">-</td>
+                                    <td class="p-4 text-center text-slate-600 dark:text-slate-400">-</td>
+                                    <td class="p-4 text-center font-bold text-slate-300 dark:text-slate-600">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="adeudados" class="page-section max-w-4xl mx-auto">
+                <div
+                    class="bg-green-50 dark:bg-green-900/10 border border-green-100 dark:border-green-900/30 rounded-2xl p-8 flex items-center gap-6">
+                    <div
+                        class="w-16 h-16 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center text-green-500 shadow-sm">
+                        <i data-lucide="party-popper" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-green-700 dark:text-green-400 text-lg">¡Todo al día!</h4>
+                        <p class="text-sm text-green-600 dark:text-green-500 mt-1">Franco no registra materias previas
+                            ni temas adeudados.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="horario" class="page-section max-w-6xl mx-auto">
+                <div class="bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-sm overflow-x-auto transition-colors">
+                    <table class="w-full text-center border-collapse">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="p-3 text-xs font-bold text-slate-400 uppercase border-b-2 border-slate-100 dark:border-slate-700">
+                                    <i data-lucide="clock" class="w-4 h-4 mx-auto mb-1"></i>
+                                </th>
+                                <th
+                                    class="p-3 text-sm font-extrabold text-blue-600 dark:text-blue-400 uppercase border-b-2 border-blue-100 dark:border-blue-900 bg-blue-50/30 dark:bg-blue-900/20 rounded-t-xl">
+                                    Lunes</th>
+                                <th
+                                    class="p-3 text-sm font-extrabold text-slate-600 dark:text-slate-300 uppercase border-b-2 border-slate-100 dark:border-slate-700">
+                                    Martes</th>
+                                <th
+                                    class="p-3 text-sm font-extrabold text-slate-600 dark:text-slate-300 uppercase border-b-2 border-slate-100 dark:border-slate-700">
+                                    Miércoles</th>
+                                <th
+                                    class="p-3 text-sm font-extrabold text-slate-600 dark:text-slate-300 uppercase border-b-2 border-slate-100 dark:border-slate-700">
+                                    Jueves</th>
+                                <th
+                                    class="p-3 text-sm font-extrabold text-slate-600 dark:text-slate-300 uppercase border-b-2 border-slate-100 dark:border-slate-700">
+                                    Viernes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="h-24">
+                                <td class="text-xs font-bold text-slate-400">07:45<br>09:05</td>
+                                <td
+                                    class="p-2 border border-slate-50 dark:border-slate-700 bg-blue-50/20 dark:bg-blue-900/10 text-blue-700 dark:text-blue-300 font-bold rounded-lg">
+                                    Matemática</td>
+                                <td
+                                    class="p-2 border border-slate-50 dark:border-slate-700 text-slate-600 dark:text-slate-400">
+                                    Lengua</td>
+                                <td
+                                    class="p-2 border border-slate-50 dark:border-slate-700 text-slate-600 dark:text-slate-400">
+                                    Historia</td>
+                                <td
+                                    class="p-2 border border-slate-50 dark:border-slate-700 text-slate-600 dark:text-slate-400">
+                                    Taller</td>
+                                <td
+                                    class="p-2 border border-slate-50 dark:border-slate-700 text-slate-600 dark:text-slate-400">
+                                    Ed. Física</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="notificaciones" class="page-section max-w-4xl mx-auto">
+                <div class="bg-white dark:bg-slate-800 p-12 rounded-[2rem] text-center shadow-sm transition-colors">
+                    <i data-lucide="bell-off" class="w-16 h-16 mx-auto mb-4 text-slate-200 dark:text-slate-700"></i>
+                    <h3 class="font-bold text-slate-400 dark:text-slate-600">Sin notificaciones nuevas</h3>
+                </div>
+            </section>
+            <section id="asistencia" class="page-section max-w-4xl mx-auto">
+                <div class="bg-white dark:bg-slate-800 p-12 rounded-[2rem] text-center shadow-sm transition-colors">
+                    <i data-lucide="clipboard-list"
+                        class="w-16 h-16 mx-auto mb-4 text-slate-200 dark:text-slate-700"></i>
+                    <h3 class="font-bold text-slate-400 dark:text-slate-600">Sección Asistencia</h3>
+                </div>
+            </section>
+            <section id="asistencia_clases" class="page-section max-w-4xl mx-auto">
+                <div class="bg-white dark:bg-slate-800 p-12 rounded-[2rem] text-center shadow-sm transition-colors">
+                    <i data-lucide="list-checks" class="w-16 h-16 mx-auto mb-4 text-slate-200 dark:text-slate-700"></i>
+                    <h3 class="font-bold text-slate-400 dark:text-slate-600">Sección Asistencia por Clase</h3>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // 1. INICIALIZAR LUCIDE ICONS (Esto transforma los <i data-lucide> en SVGs)
+        lucide.createIcons();
+
+        function showPage(pageId, btnElement) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+
+            // Mostrar la seleccionada
+            const selected = document.getElementById(pageId);
+            if (selected) selected.classList.add('active');
+
+            // Actualizar botones del menú (Estilo activo)
+            if (btnElement) {
+                document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
+
+            // Actualizar título
+            const titles = {
+                'panel': 'Panel General',
+                'comunicados': 'Comunicados Institucionales',
+                'calificaciones': 'Boletín de Calificaciones',
+                'adeudados': 'Materias Pendientes',
+                'asistencia': 'Reporte de Asistencia',
+                'notificaciones': 'Notificaciones',
+                'asistencia_clases': 'Asistencia por Materia',
+                'horario': 'Cronograma Semanal'
+            };
+            document.getElementById('page-title').innerText = titles[pageId] || 'Panel';
+
+            // Re-renderizar iconos (por si acaso al cambiar display none/block)
+            lucide.createIcons();
+        }
+    </script>
+</body>
+
+</html>

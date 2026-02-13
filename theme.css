@@ -1,0 +1,23 @@
+/* Estilos para transiciones suaves de tema */
+body,
+main,
+aside,
+header,
+.bg-white,
+.bg-slate-50,
+.bg-blue-50,
+input,
+button,
+.nav-btn,
+div[class*="bg-"],
+div[class*="text-"] {
+    transition: background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Ocultar elementos utilitarios */
+.hidden {
+    display: none !important;
+}
